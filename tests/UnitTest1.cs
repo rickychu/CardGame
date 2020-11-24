@@ -75,7 +75,7 @@ namespace test
             var deck = new Deck();
 
             // Deal all the cards
-            for (int i=0; i<Deck.MaxCard; i++) {
+            for (int i=0; i<deck.CardCount; i++) {
                 var card = deck.dealOneCard();
             }
 

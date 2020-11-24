@@ -5,8 +5,6 @@ namespace CardGame
 {
     public class Deck {
         
-        public const int MaxCard = 52;
-
         private const int ShuffleCount = 5;
 
         protected List<Card> cards = new List<Card>();
@@ -14,15 +12,18 @@ namespace CardGame
 
         public Deck() {
             // Assign suit and value to card to build the deck
-            // Note: Need to keep MaxCard in sync. For simplicity, we just
-            //       set this to 52. We might want to determine the max card from
-            //       the constructor directly
             foreach (Suit suit in Enum.GetValues(typeof(Suit))) {
                 for (int value=1; value<=13; value++) {
                     var card = new Card(suit, value);
 
                     cards.Add(card);
                 }
+            }
+        }
+
+        public int CardCount {
+            get {
+                return this.cards.Count;
             }
         }
 
@@ -38,11 +39,13 @@ namespace CardGame
         // Go through this multiple times to increase the randomness
         public void shuffle() {
 
+            int cardCount = this.cards.Count;
+
             // Swap the whole deck of card n times
             for (int n=0; n<ShuffleCount; n++) {
-                for (int i=0; i<MaxCard; i++) {
+                for (int i=0; i<cardCount; i++) {
                     var rand = new Random();
-                    int randIndex = rand.Next(MaxCard);
+                    int randIndex = rand.Next(cardCount);
 
                     this.swap(i, randIndex);
                 }
@@ -55,7 +58,7 @@ namespace CardGame
         // deal one card
         public Card dealOneCard() {
             // Make sure index is less than the max card
-            if (this.currentIndex >= MaxCard) {
+            if (this.currentIndex >= this.cards.Count) {
                 throw new EndOfDeckException();
             }
                 
