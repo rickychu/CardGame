@@ -113,10 +113,10 @@ namespace CardGame
     }
 
     public enum Suit {
-        Spade = 3,
-        Heart = 2,
-        Club = 1,
-        Diamond = 0
+        Diamond,
+        Club,
+        Heart,
+        Spade
     }
 
 }
