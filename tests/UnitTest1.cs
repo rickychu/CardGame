@@ -22,6 +22,7 @@ namespace test
         [Fact]
         public void TestFaceValue()
         {
+            // Test the face value of the card class
             var Input = new Dictionary<int, string>{
                 {1, "Ace"},   // 1 = A
                 {2, "2"},   // 2-10 = digit
@@ -32,9 +33,9 @@ namespace test
             };
 
             // Test face value assignments
-            foreach (var kv in Input.Keys) {
-                var card = new Card(Suit.Club, kv);            
-                var expectedFaceValue = Input[kv];
+            foreach (var key in Input.Keys) {
+                var card = new Card(Suit.Club, key);            
+                var expectedFaceValue = Input[key];
 
                 Assert.Equal(card.faceValue, expectedFaceValue);
             }
@@ -45,8 +46,6 @@ namespace test
         {
             // Test the shuffle function. Fail if all the cards
             // drawn have value in sequence
-            Console.WriteLine("====================================================");
-
             var deck = new Deck();
             deck.shuffle();
 
@@ -73,14 +72,12 @@ namespace test
         [Fact]
         public void TestDealtMoreCardsThanAvailable()
         {
-            Console.WriteLine("====================================================");
             var deck = new Deck();
 
             // Deal all the cards
             for (int i=0; i<Deck.MaxCard; i++) {
                 var card = deck.dealOneCard();
             }
-            Console.WriteLine($"Dealt all cards");
 
             Card oneMoreCard;
             Assert.Throws<EndOfDeckException>(
